@@ -1,0 +1,694 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VIL Provider System</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        .card { margin-bottom: 20px; }
+        .text-success { color: #28a745 !important; }
+        .text-warning { color: #ffc107 !important; }
+        .text-danger { color: #dc3545 !important; }
+        .small { font-size: 0.875rem; }
+        .float-right { float: right; }
+        .action-buttons { margin-top: 10px; }
+        .list-group-item { padding: 15px; }
+        .status-badge {
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body class="bg-light">
+    <div class="container mt-4">
+        <h2 class="text-center mb-4">VIL Provider System</h2>
+
+        <!-- User Management Section -->
+        <div class="card">
+            <div class="card-header bg-primary text-white">
+                <h4>User Management</h4>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <h5>Register New User</h5>
+                        <form id="registerForm">
+                            <div class="form-group">
+                                <input type="text" id="name" class="form-control mb-2" placeholder="Name" required>
+                            </div>
+                            <div class="form-group">
+                                <input type="email" id="email" class="form-control mb-2" placeholder="Email" required>
+                            </div>
+                            <div class="form-group">
+                                <input type="password" id="password" class="form-control mb-2" placeholder="Password" required>
+                            </div>
+                            <button type="submit" class="btn btn-success">Register User</button>
+                        </form>
+                        <div id="registerMessage" class="mt-2"></div>
+                    </div>
+                    <div class="col-md-6">
+                        <h5>User Operations</h5>
+                        <div class="form-group">
+                            <input type="number" id="searchUserId" class="form-control mb-2" placeholder="Enter User ID">
+                            <button id="getUserBtn" class="btn btn-info">Get User</button>
+                            <button id="deleteUserBtn" class="btn btn-danger">Delete User</button>
+                        </div>
+                        <div id="userDetails" class="mt-3"></div>
+                        <button id="getAllUsersBtn" class="btn btn-secondary mt-2">List All Users</button>
+                        <div id="allUsersList" class="mt-3"></div>
+                    </div>
+					
+		
+                </div>
+            </div>
+        </div>
+
+        <!-- Subscription Management Section -->
+        <div class="card">
+            <div class="card-header bg-warning text-dark">
+                <h4>Subscription Management</h4>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <h5>Create Subscription</h5>
+                        <form id="createSubscriptionForm">
+                            <div class="form-group">
+                                <input type="number" id="subUserId" class="form-control mb-2" placeholder="User ID" required>
+                            </div>
+                            <div class="form-group">
+                                <input type="text" id="subType" class="form-control mb-2" placeholder="Subscription Type" required>
+                            </div>
+                            <button type="submit" class="btn btn-success">Create Subscription</button>
+                        </form>
+                        <div id="subscriptionCreateMessage" class="mt-2"></div>
+                    </div>
+                    <div class="col-md-6">
+                        <h5>Manage Subscription</h5>
+                        <div class="form-group">
+                            <input type="number" id="subscriptionUserId" class="form-control mb-2" placeholder="User ID">
+                        </div>
+                        <div class="form-group">
+                            <select id="subscriptionAction" class="form-control mb-2">
+                                <option value="activate">Activate</option>
+                                <option value="deactivate">Deactivate</option>
+                                <option value="upgrade">Upgrade</option>
+                                <option value="downgrade">Downgrade</option>
+                            </select>
+                        </div>
+                        <button id="manageSubscriptionBtn" class="btn btn-warning">Update Subscription</button>
+                        <div id="subscriptionMessage" class="mt-2"></div>
+                        <button id="getAllSubscriptionsBtn" class="btn btn-secondary mt-2">List All Subscriptions</button>
+                        <div id="allSubscriptionsList" class="mt-3"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Complaint Management Section -->
+        <div class="card">
+            <div class="card-header bg-danger text-white">
+                <h4>Complaint Management</h4>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <h5>Log New Complaint</h5>
+                        <form id="complaintForm">
+                            <div class="form-group">
+                                <input type="number" id="complaintUserId" class="form-control mb-2" placeholder="User ID" required>
+                            </div>
+                            <div class="form-group">
+                                <textarea id="complaintDescription" class="form-control mb-2" placeholder="Complaint Description" rows="3" required></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-danger">Submit Complaint</button>
+                        </form>
+                        <div id="complaintMessage" class="mt-2"></div>
+                    </div>
+                    <div class="col-md-6">
+                        <h5>Complaint Operations</h5>
+                        <div class="form-group">
+                            <input type="number" id="searchComplaintId" class="form-control mb-2" placeholder="Enter Complaint ID">
+                            <button id="getComplaintBtn" class="btn btn-info">Get Complaint</button>
+                            <button id="deleteComplaintBtn" class="btn btn-dark">Delete Complaint</button>
+                        </div>
+                        <div id="complaintDetails" class="mt-3"></div>
+                        <button id="getAllComplaintsBtn" class="btn btn-secondary mt-2">List All Complaints</button>
+                        <div id="allComplaintsList" class="mt-3"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Compliance Monitoring Section -->
+        <div class="card">
+            <div class="card-header bg-dark text-white">
+                <h4>Compliance Monitoring</h4>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <h5>Generate Compliance Report</h5>
+                        <form id="complianceForm">
+                            <div class="form-group">
+                                <input type="text" id="complianceName" class="form-control mb-2" placeholder="Report Name" required>
+                            </div>
+                            <div class="form-group">
+                                <select id="complianceStatus" class="form-control mb-2" required>
+                                    <option value="">Select Status</option>
+                                    <option value="COMPLIANT">Compliant</option>
+                                    <option value="NON_COMPLIANT">Non-Compliant</option>
+                                    <option value="PENDING">Pending</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <textarea id="complianceDescription" class="form-control mb-2" placeholder="Description" rows="3" required></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-dark">Generate Report</button>
+                        </form>
+                        <div id="complianceCreateMessage" class="mt-2"></div>
+                    </div>
+                    <div class="col-md-6">
+                        <h5>Compliance Reports</h5>
+                        <div class="form-group">
+                            <select id="complianceFilter" class="form-control mb-2">
+                                <option value="">All Reports</option>
+                                <option value="COMPLIANT">Compliant</option>
+                                <option value="NON_COMPLIANT">Non-Compliant</option>
+                                <option value="PENDING">Pending</option>
+                            </select>
+                        </div>
+                        <button id="fetchCompliance" class="btn btn-info">View Reports</button>
+                        <button id="refreshCompliance" class="btn btn-outline-secondary ml-2">Refresh</button>
+                        <ul id="complianceList" class="list-group mt-3"></ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Audit Log Section -->
+        <div class="card">
+            <div class="card-header bg-info text-white">
+                <h4>System Audit Logs</h4>
+            </div>
+            <div class="card-body">
+                <button id="fetchLogs" class="btn btn-info">View Audit Logs</button>
+                <button id="clearLogs" class="btn btn-outline-danger ml-2">Clear Logs</button>
+                <ul id="logList" class="list-group mt-3"></ul>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Base URL configuration
+        const API_BASE_URL = "http://localhost:9097/api";
+        
+        // User Management Functions
+        $("#registerForm").submit(function(event) {
+            event.preventDefault();
+            const userData = {
+                name: $("#name").val(),
+                email: $("#email").val(),
+                password: $("#password").val()
+            };
+            
+            $.ajax({
+                url: `${API_BASE_URL}/users/register`,
+                type: "POST",
+                contentType: "application/json",
+                data: JSON.stringify(userData),
+                success: function(response) {
+                    $("#registerMessage").html('<div class="alert alert-success">User registered successfully! ID: ' + response.id + '</div>');
+                    $("#registerForm")[0].reset();
+                },
+                error: function(xhr) {
+                    showError("#registerMessage", "Registration failed", xhr);
+                }
+            });
+        });
+
+        $("#getUserBtn").click(function() {
+            const userId = $("#searchUserId").val();
+            if (!userId) {
+                showAlert("#userDetails", "Please enter a User ID", "danger");
+                return;
+            }
+            
+            $.get(`${API_BASE_URL}/users/${userId}`, function(user) {
+                if (user) {
+                    $("#userDetails").html(`
+                        <div class="card">
+                            <div class="card-body">
+                                <h5>User Details</h5>
+                                <p><strong>ID:</strong> ${user.id || 'N/A'}</p>
+                                <p><strong>Name:</strong> ${user.name || 'N/A'}</p>
+                                <p><strong>Email:</strong> ${user.email || 'N/A'}</p>
+                            </div>
+                        </div>
+                    `);
+                } else {
+                    showAlert("#userDetails", "User not found", "warning");
+                }
+            }).fail(function(xhr) {
+                showError("#userDetails", "Error fetching user", xhr);
+            });
+        });
+
+        $("#deleteUserBtn").click(function() {
+            const userId = $("#searchUserId").val();
+            if (!userId) {
+                showAlert("#userDetails", "Please enter a User ID", "danger");
+                return;
+            }
+            
+            if (!confirm("Are you sure you want to delete this user?")) return;
+            
+            $.ajax({
+                url: `${API_BASE_URL}/users/${userId}`,
+                type: "DELETE",
+                success: function() {
+                    showAlert("#userDetails", "User deleted successfully", "success");
+                    $("#searchUserId").val("");
+                },
+                error: function(xhr) {
+                    showError("#userDetails", "Error deleting user", xhr);
+                }
+            });
+        });
+
+		$("#getAllUsersBtn").click(function() {
+		    $.get(`${API_BASE_URL}/users`, function(users) {
+		        if (users.length === 0) {
+		            $("#allUsersList").html('<div class="alert alert-info">No users found</div>');
+		            return;
+		        }
+		        
+		        let html = '<div class="list-group">';
+		        users.forEach(user => {
+		            html += `
+		                <div class="list-group-item">
+		                    <div class="d-flex justify-content-between align-items-center">
+		                        <div>
+		                            <strong>${user.name}</strong> (ID: ${user.id})
+		                            <div class="small text-muted">${user.email}</div>
+		                        </div>
+		                        <div>
+		                            <button class="btn btn-sm btn-outline-info view-user" data-id="${user.id}">View</button>
+		                            <button class="btn btn-sm btn-outline-danger delete-user" data-id="${user.id}">Delete</button>
+		                        </div>
+		                    </div>
+		                </div>`;
+		        });
+		        html += '</div>';
+		        $("#allUsersList").html(html);
+		        
+		        // Add click handlers for dynamically created buttons
+		        $(".view-user").click(function() {
+		            const userId = $(this).data("id");
+		            $("#searchUserId").val(userId);
+		            $("#getUserBtn").click();
+		        });
+		        
+		        $(".delete-user").click(function() {
+		            const userId = $(this).data("id");
+		            if (confirm("Are you sure you want to delete this user?")) {
+		                $.ajax({
+		                    url: `${API_BASE_URL}/users/${userId}`,
+		                    type: "DELETE",
+		                    success: function() {
+		                        $("#getAllUsersBtn").click(); // Refresh the list
+		                    }
+		                });
+		            }
+		        });
+		    }).fail(function(xhr) {
+		        showError("#allUsersList", "Error fetching users", xhr);
+		    });
+		});
+
+        // Subscription Management Functions
+
+		$("#createSubscriptionForm").submit(function(event) {
+		    event.preventDefault();
+		    const subData = {
+		        userId: $("#subUserId").val(),
+		        type: $("#subType").val(),
+		        status: "ACTIVE"
+		    };
+		    
+		    $.ajax({
+		        url: `${API_BASE_URL}/subscriptions/create`,
+		        type: "POST",
+		        contentType: "application/json",
+		        data: JSON.stringify(subData),
+		        success: function(response) {
+		            $("#subscriptionCreateMessage").html(`
+		                <div class="alert alert-success">
+		                    Subscription created successfully!<br>
+		                    ID: ${response.id}<br>
+		                    User ID: ${response.userId}<br>
+		                    Type: ${response.type}
+		                </div>
+		            `);
+		            $("#createSubscriptionForm")[0].reset();
+		            $("#getAllSubscriptionsBtn").click(); // Refresh the list
+		        }
+		    });
+		});
+
+		// Manage Subscription
+		$("#manageSubscriptionBtn").click(function() {
+		    const userId = $("#subscriptionUserId").val();
+		    const action = $("#subscriptionAction").val();
+		    
+		    if (!userId) {
+		        showAlert("#subscriptionMessage", "Please enter a User ID", "danger");
+		        return;
+		    }
+		    
+		    $.ajax({
+		        url: `${API_BASE_URL}/subscriptions/update/${action}/${userId}`,
+		        type: "PUT",
+		        success: function(response) {
+		            $("#subscriptionMessage").html(`
+		                <div class="alert alert-success">
+		                    Subscription ${action}d successfully!<br>
+		                    New Status: ${response.status}
+		                </div>
+		            `);
+		            $("#getAllSubscriptionsBtn").click(); // Refresh the list
+		        },
+		        error: function(xhr) {
+		            showError("#subscriptionMessage", "Error updating subscription", xhr);
+		        }
+		    });
+		});
+
+		// List All Subscriptions
+		$("#getAllSubscriptionsBtn").click(function() {
+		    $.get(`${API_BASE_URL}/subscriptions`, function(subscriptions) {
+		        if (subscriptions.length === 0) {
+		            $("#allSubscriptionsList").html('<div class="alert alert-info">No subscriptions found</div>');
+		            return;
+		        }
+		        
+		        let html = '<div class="list-group">';
+		        subscriptions.forEach(sub => {
+		            html += `
+		                <div class="list-group-item">
+		                    <div class="d-flex justify-content-between align-items-center">
+		                        <div>
+		                            <strong>User ID:</strong> ${sub.userId} | 
+		                            <strong>Type:</strong> ${sub.type} | 
+		                            <strong>Status:</strong> <span class="${getStatusClass(sub.status)}">${sub.status}</span>
+		                        </div>
+		                        <div>
+		                            <button class="btn btn-sm btn-outline-warning manage-sub" data-id="${sub.userId}">Manage</button>
+		                        </div>
+		                    </div>
+		                </div>`;
+		        });
+		        html += '</div>';
+		        $("#allSubscriptionsList").html(html);
+		        
+		        // Add click handler for manage buttons
+		        $(".manage-sub").click(function() {
+		            const userId = $(this).data("id");
+		            $("#subscriptionUserId").val(userId);
+		        });
+		    });
+		});
+                html += '</div>';
+                $("#allSubscriptionsList").html(html);
+                
+                // Add event handlers for dynamically created buttons
+                $(".manage-sub").click(function() {
+                    const userId = $(this).data("id");
+                    $("#subscriptionUserId").val(userId);
+                });
+            }).fail(function(xhr) {
+                showError("#allSubscriptionsList", "Error fetching subscriptions", xhr);
+            });
+        });
+
+        // Complaint Management Functions
+        $("#complaintForm").submit(function(event) {
+            event.preventDefault();
+            const complaintData = {
+                userId: $("#complaintUserId").val(),
+                description: $("#complaintDescription").val()
+            };
+            
+            $.ajax({
+                url: `${API_BASE_URL}/complaints/log`,
+                type: "POST",
+                contentType: "application/json",
+                data: JSON.stringify(complaintData),
+                success: function(response) {
+                    $("#complaintMessage").html('<div class="alert alert-success">Complaint logged successfully! ID: ' + response.id + '</div>');
+                    $("#complaintForm")[0].reset();
+                },
+                error: function(xhr) {
+                    showError("#complaintMessage", "Error logging complaint", xhr);
+                }
+            });
+        });
+
+        $("#getComplaintBtn").click(function() {
+            const complaintId = $("#searchComplaintId").val();
+            if (!complaintId) {
+                showAlert("#complaintDetails", "Please enter a Complaint ID", "danger");
+                return;
+            }
+            
+            $.get(`${API_BASE_URL}/complaints/${complaintId}`, function(complaint) {
+                if (complaint) {
+                    $("#complaintDetails").html(`
+                        <div class="card">
+                            <div class="card-body">
+                                <h5>Complaint Details</h5>
+                                <p><strong>ID:</strong> ${complaint.id || 'N/A'}</p>
+                                <p><strong>User ID:</strong> ${complaint.userId || 'N/A'}</p>
+                                <p><strong>Description:</strong> ${complaint.description || 'N/A'}</p>
+                                <p><strong>Status:</strong> <span class="${getStatusClass(complaint.status)}">${complaint.status || 'N/A'}</span></p>
+                                <p><strong>Created:</strong> ${complaint.createdAt || 'N/A'}</p>
+                            </div>
+                        </div>
+                    `);
+                } else {
+                    showAlert("#complaintDetails", "Complaint not found", "warning");
+                }
+            }).fail(function(xhr) {
+                showError("#complaintDetails", "Error fetching complaint", xhr);
+            });
+        });
+
+        $("#deleteComplaintBtn").click(function() {
+            const complaintId = $("#searchComplaintId").val();
+            if (!complaintId) {
+                showAlert("#complaintDetails", "Please enter a Complaint ID", "danger");
+                return;
+            }
+            
+            if (!confirm("Are you sure you want to delete this complaint?")) return;
+            
+            $.ajax({
+                url: `${API_BASE_URL}/complaints/${complaintId}`,
+                type: "DELETE",
+                success: function() {
+                    showAlert("#complaintDetails", "Complaint deleted successfully", "success");
+                    $("#searchComplaintId").val("");
+                },
+                error: function(xhr) {
+                    showError("#complaintDetails", "Error deleting complaint", xhr);
+                }
+            });
+        });
+
+		$("#getAllComplaintsBtn").click(function() {
+		    $.get(`${API_BASE_URL}/complaints`, function(complaints) {
+		        if (complaints.length === 0) {
+		            $("#allComplaintsList").html('<div class="alert alert-info">No complaints found</div>');
+		            return;
+		        }
+		        
+		        let html = '<div class="list-group">';
+		        complaints.forEach(complaint => {
+		            html += `
+		                <div class="list-group-item">
+		                    <div class="d-flex justify-content-between align-items-center">
+		                        <div>
+		                            <strong>ID:</strong> ${complaint.id} | 
+		                            <strong>User ID:</strong> ${complaint.userId} | 
+		                            <strong>Status:</strong> <span class="${getStatusClass(complaint.status)}">${complaint.status}</span>
+		                            <div class="small">${complaint.description}</div>
+		                        </div>
+		                        <div>
+		                            <button class="btn btn-sm btn-outline-info view-complaint" data-id="${complaint.id}">View</button>
+		                            <button class="btn btn-sm btn-outline-danger delete-complaint" data-id="${complaint.id}">Delete</button>
+		                        </div>
+		                    </div>
+		                </div>`;
+		        });
+		        html += '</div>';
+		        $("#allComplaintsList").html(html);
+		        
+		        // Add click handlers for dynamically created buttons
+		        $(".view-complaint").click(function() {
+		            const complaintId = $(this).data("id");
+		            $("#searchComplaintId").val(complaintId);
+		            $("#getComplaintBtn").click();
+		        });
+		        
+		        $(".delete-complaint").click(function() {
+		            const complaintId = $(this).data("id");
+		            if (confirm("Are you sure you want to delete this complaint?")) {
+		                $.ajax({
+		                    url: `${API_BASE_URL}/complaints/${complaintId}`,
+		                    type: "DELETE",
+		                    success: function() {
+		                        $("#getAllComplaintsBtn").click(); // Refresh the list
+		                    }
+		                });
+		            }
+		        });
+		    }).fail(function(xhr) {
+		        showError("#allComplaintsList", "Error fetching complaints", xhr);
+		    });
+		});
+
+        // Compliance Management Functions
+        $("#complianceForm").submit(function(event) {
+            event.preventDefault();
+            const complianceData = {
+                name: $("#complianceName").val(),
+                status: $("#complianceStatus").val(),
+                description: $("#complianceDescription").val()
+            };
+            
+            $.ajax({
+                url: `${API_BASE_URL}/compliance`,
+                type: "POST",
+                contentType: "application/json",
+                data: JSON.stringify(complianceData),
+                success: function(response) {
+                    $("#complianceCreateMessage").html('<div class="alert alert-success">Compliance report generated successfully!</div>');
+                    $("#complianceForm")[0].reset();
+                    $("#fetchCompliance").click(); // Refresh the list
+                },
+                error: function(xhr) {
+                    showError("#complianceCreateMessage", "Error generating compliance report", xhr);
+                }
+            });
+        });
+
+        $("#fetchCompliance").click(function() {
+            const filter = $("#complianceFilter").val();
+            const url = filter ? `${API_BASE_URL}/compliance/status/${filter}` : `${API_BASE_URL}/compliance`;
+            
+            $.ajax({
+                url: url,
+                type: "GET",
+                success: function(reports) {
+                    if (reports.length === 0) {
+                        $("#complianceList").html('<li class="list-group-item">No compliance reports found</li>');
+                        return;
+                    }
+                    
+                    $("#complianceList").empty();
+                    reports.forEach(report => {
+                        $("#complianceList").append(`
+                            <li class="list-group-item">
+                                <div class="d-flex justify-content-between">
+                                    <div>
+                                        <strong>${report.name}</strong>
+                                        <span class="status-badge ${getStatusClass(report.status)}">${report.status}</span>
+                                    </div>
+                                    <div class="small text-muted">${report.lastChecked}</div>
+                                </div>
+                                <div class="mt-2">${report.description}</div>
+                            </li>
+                        `);
+                    });
+                },
+                error: function(xhr) {
+                    showError("#complianceList", "Error fetching compliance reports", xhr);
+                }
+            });
+        });
+
+        $("#refreshCompliance").click(function() {
+            $("#fetchCompliance").click();
+        });
+
+        // Audit Log Functions
+        $("#fetchLogs").click(function() {
+            $.get(`${API_BASE_URL}/logs`, function(logs) {
+                if (logs.length === 0) {
+                    $("#logList").html('<li class="list-group-item">No logs found</li>');
+                    return;
+                }
+                
+                $("#logList").empty();
+                logs.forEach(log => {
+                    $("#logList").append(`
+                        <li class="list-group-item">
+                            <div class="d-flex justify-content-between">
+                                <div>
+                                    <strong>${log.action}</strong> by User ${log.performedBy}
+                                </div>
+                                <div class="small text-muted">${log.timestamp}</div>
+                            </div>
+                        </li>
+                    `);
+                });
+            }).fail(function(xhr) {
+                showError("#logList", "Error fetching logs", xhr);
+            });
+        });
+
+        $("#clearLogs").click(function() {
+            if (!confirm("Are you sure you want to clear all logs?")) return;
+            
+            $.ajax({
+                url: `${API_BASE_URL}/logs`,
+                type: "DELETE",
+                success: function() {
+                    $("#logList").empty();
+                    showAlert("#logList", "Logs cleared successfully", "success");
+                },
+                error: function(xhr) {
+                    showError("#logList", "Error clearing logs", xhr);
+                }
+            });
+        });
+
+        // Helper Functions
+        function showAlert(selector, message, type) {
+            $(selector).html(`<div class="alert alert-${type}">${message}</div>`);
+            setTimeout(() => $(selector).empty(), 5000);
+        }
+
+        function showError(selector, message, xhr) {
+            let errorMsg = message;
+            if (xhr.responseJSON && xhr.responseJSON.message) {
+                errorMsg += ": " + xhr.responseJSON.message;
+            }
+            showAlert(selector, errorMsg, "danger");
+        }
+
+        function getStatusClass(status) {
+            if (!status) return "";
+            status = status.toUpperCase();
+            if (status.includes("ACTIVE") || status.includes("COMPLIANT")) return "text-success";
+            if (status.includes("INACTIVE") || status.includes("NON_COMPLIANT")) return "text-danger";
+            if (status.includes("PENDING")) return "text-warning";
+            return "";
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<jardesc>
+    <jar path="C:/Users/anupr/OneDrive/Desktop/trai_java_application.jar"/>
+    <options buildIfNeeded="true" compress="true" descriptionLocation="/VIL_Subscription_Tracking_Sys/trai_java_application.jardesc" exportErrors="true" exportWarnings="true" includeDirectoryEntries="true" overwrite="true" saveDescription="true" storeRefactorings="false" useSourceFolders="false"/>
+    <storedRefactorings deprecationInfo="true" structuralOnly="false"/>
+    <selectedProjects/>
+    <manifest generateManifest="true" mainClassHandleIdentifier="=VIL_Subscription_Tracking_Sys/src\/main\/java=/optional=/true=/=/maven.pomderived=/true=/&lt;com.vil{VilTraiComplienceApplication_sys.java[VilTraiComplienceApplication_sys" manifestLocation="" manifestVersion="1.0" reuseManifest="false" saveManifest="false" usesManifest="true">
+        <sealing sealJar="false">
+            <packagesToSeal/>
+            <packagesToUnSeal/>
+        </sealing>
+    </manifest>
+    <selectedElements exportClassFiles="true" exportJavaFiles="false" exportOutputFolder="false">
+        <folder path="/VIL_Subscription_Tracking_Sys/logs"/>
+        <folder path="/VIL_Subscription_Tracking_Sys/src"/>
+        <folder path="/VIL_Subscription_Tracking_Sys/target"/>
+        <file path="/VIL_Subscription_Tracking_Sys/.classpath"/>
+        <file path="/VIL_Subscription_Tracking_Sys/.project"/>
+        <file path="/VIL_Subscription_Tracking_Sys/pom.xml"/>
+        <file path="/VIL_Subscription_Tracking_Sys/trai_java_application.jardesc"/>
+        <javaElement handleIdentifier="=VIL_Subscription_Tracking_Sys/src\/main\/java=/optional=/true=/=/maven.pomderived=/true=/"/>
+        <javaElement handleIdentifier="=VIL_Subscription_Tracking_Sys/src\/main\/resources=/maven.pomderived=/true=/=/optional=/true=/"/>
+    </selectedElements>
+</jardesc>
